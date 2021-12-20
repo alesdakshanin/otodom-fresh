@@ -2,6 +2,7 @@
 
 This is a very basic script that lets you to keep track of the fresh otodom.pl links
 you might be interested in. It just stores the links that already collected by the script in order to filter out duplicates
+so you get the diff since the last script launch.
 
 
 ## How to use
