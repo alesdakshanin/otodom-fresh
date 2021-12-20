@@ -15,11 +15,16 @@ class Item:
         return f"https://www.otodom.pl{self.path}"
 
 
+def get_url():
+    with open("otodom_url.txt", "r") as f:
+        url = f.read()
+        if not url:
+            raise ValueError("URL is empty")
+        return url
+
+
 def fetch_items() -> List[Item]:
-    url = "https://www.otodom.pl/pl/oferty/wynajem/mieszkanie/wiele-lokalizacji?roomsNumber=%5BTWO%2CTHREE%5D&priceMax" \
-          "=3500&areaMin=40&distanceRadius=0&market=ALL&page=1&limit=72&locations=%5Bdistricts_6-3319%2Cdistricts_6-39" \
-          "%2Cdistricts_6-40%2Cdistricts_6-44%2Cdistricts_6-51%2Cdistricts_6-117%2Cdistricts_6-724%5D&by=LATEST&direction" \
-          "=DESC "
+    url = get_url()
 
     r = requests.get(url)
     assert r.status_code == 200
@@ -63,7 +68,7 @@ if __name__ == '__main__':
         paths = list(sorted(new_paths.union(existing_paths)))
         write_lines(data_file, paths)
 
-    print(f"Found {len(new_paths)} new items! See data/fresh.txt for the links.")
+    print(f"Found {len(new_paths)} new items!")
     fresh_urls = sorted((Item(path=p).url for p in new_paths))
     with open(fresh_file_path, "w+") as fresh_file:
         write_lines(fresh_file, fresh_urls)
