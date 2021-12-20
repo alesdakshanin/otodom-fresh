@@ -5,7 +5,7 @@ you might be interested in. It just stores the links that already collected by t
 
 
 ## How to use
-
+0. Make sure docker is running on your local machine
 1. Clone the repo```git clone git@github.com:alesdokshanin/otodom-fresh.git```
 2. Update the `otodom_url.txt` with the link that fits your needs. 
 You should sort by new first and set the page size to maximum available.
